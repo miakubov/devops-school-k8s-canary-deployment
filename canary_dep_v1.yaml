@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: web
+  name: web-v1
+  namespace: k8s-canary
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: web-v1
+  template:
+    metadata:
+      labels:
+        app: web-v1
+    spec:
+      containers:
+      - image: nginx:1.20.2
+        name: nginx-v1
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "125m"
+          limits:
+            memory: "256Mi"
+            cpu: "250m"
+        ports:
+        - containerPort: 80
+        volumeMounts:
+          - name: config-nginx-v1
+            mountPath: /etc/nginx/conf.d
+      volumes:
+        - name: config-nginx-v1
+          configMap:
+            name: nginx-configmap-v1
