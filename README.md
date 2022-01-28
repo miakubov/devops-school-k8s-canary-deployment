@@ -34,7 +34,7 @@
   
 Проверка работы из minikube проводится обращением адрес minikube  
 **curl $(minikube ip)**  
-**curl $(minikube ip) -H "web: v2"**# по загаловку.
+**curl $(minikube ip) -H "canary: always"**# по загаловку.
   
 **ВАЖНО** 
 Основная особенность "архитектуры":  
